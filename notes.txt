@@ -1,0 +1,10 @@
+== Current Research ==
+https://ieeexplore.ieee.org/abstract/document/9328750
+https://ieeexplore.ieee.org/abstract/document/9651303
+https://openaccess.inaf.it/handle/20.500.12386/33616
+https://arxiv.org/abs/2401.14550
+https://arxiv.org/abs/2204.13543
+https://blog.chromium.org/2008/09/multi-process-architecture.html
+https://ieeexplore.ieee.org/document/9651303
+https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-job-scheduling/
+
