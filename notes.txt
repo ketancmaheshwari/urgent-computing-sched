@@ -1,4 +1,5 @@
 == Current Research ==
+https://people.ece.ubc.ca/sasha/papers/eurosys16-final29.pdf
 https://ieeexplore.ieee.org/abstract/document/9328750
 https://ieeexplore.ieee.org/abstract/document/9651303
 https://openaccess.inaf.it/handle/20.500.12386/33616
@@ -7,4 +8,44 @@ https://arxiv.org/abs/2204.13543
 https://blog.chromium.org/2008/09/multi-process-architecture.html
 https://ieeexplore.ieee.org/document/9651303
 https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-job-scheduling/
+https://www.computer.org/csdl/proceedings-article/hipcw/2024/091100a068/24MFoMM1vRS : Predictive Modeling of Performance Variability in HPC Applications
+
+
+== Ideas and Plans ==
+- Hypothetical scenarios of 10,20,30 % of jobs that need urgent resources.
+- Draw a spectrum of types of jobs that need resources urgently on one extreme to "don't care" on other extreme.
+
+
+
+== Major Contributions of the study ==
+- In depth analysis of the behavior of the various job-scheduling schemes in the presence of urgent computing
+- A simple framework for performing simulations of job submissions by dummy users in a safe / guarded / controlled setup and customizable tooling knobs.
+- A number of optimized and fine tuned slurm configs that could be readily adapted to suit needs for a given set of urgent computing requirements.
+- A detailed literature review of the field.
+
+== Useful Slurm query tools ==
+sinfo
+sacctmgr show qos
+
+== Past Work ==
+/Users/km0/slurm_queue_testing
+/Users/km0/gitrepos/stochsimsched
+
+==
+Notes from Meeting with Thomas and Terry
+- Co-scheduling for instruments when reservations are in place.
+- Resulting in a dynamic QoS for Slurm
+- A wide variety of jobs that may be classified as communication / IO / Compute heavy applications
+- A negotiation protocol may be implemented for preemption -- wide variety of strategies are possible
+- Relates to work by Tanzima Islam at Texas State University
+  - Application patterns such as power profile
+- Can some kind of telemetry, such as Darshan identify the application phases such as IO, Communication, Computation
+- Can we classify applications into checkpointable and non-checkpointable? Typically, single-node, serial applications are easier to checkpoint
+- How much of this can be integrated / automated within Slurm?
+- S3M uses Slurm's REST api exclusively as far as scheduling goes
+- The concept / idea of "Utility Curves" for applications
+- Incorporating reservations and QoS in tandem so users don't bombard higher QoS -- many scenarios possible
+- Quantum resources and scheduling may form an interesting challenge -- best interleaving strategy
+- Three interleavable resources: Parallel File System | Power | Interconnect
+- How to integrate AI to ease / enhance / automate some of these efforts?
 
