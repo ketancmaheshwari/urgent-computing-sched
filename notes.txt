@@ -52,3 +52,23 @@ Notes from Meeting with Thomas and Terry
 - Three interleavable resources: Parallel File System | Power | Interconnect
 - How to integrate AI to ease / enhance / automate some of these efforts?
 
+
+=== Workflow to analyze existing Slurm data ===
+Workflows are end-to-end solutions to complex problems. They are a reproducible unit of communication of the work that is done. 
+Scheduling itself is a complex problem, especially the HPC job scheduling that is shaped by various contesting forces. These include the user expectations, the scheduling policies, the desire to optimially utilize the resources the app requirements and admin policies, maybe. The nature of the jobs that comes under application requirements so that becomes a complex problem. There is no systematic analysis that has been done on existing jobs in a given hpc center. 
+
+in this paper we provide a workflow that implements a readymade recipe for extensive analysis of current jobs that will give readily insights on the jobs that have already run. We hope that this workflow will be useful for the community to analyze a site's historical jobs and it will provide insights on how to the overall performance of a center and inform shaping of the future policies of a given center.
+
+
+Workflow stages:
+
+IDEA: Maybe call it AI assisted workflows. Along the philosophy that AI is supposed to assist the humans.
+
+Stage 1. Obtain data (params: fetch / read from disc; columnset:, Date-Range, append to disk data)
+      # the append option is interesting because then the entire dataset won't be needed to be fetched repeatitively.
+      # need to find how many jobs on average do frontier receive every day.
+Stage 2. Clean data (convert K / M / G etc to raw numbers, remove missing data where applicable)
+Stage 3. Plot data
+Stage 4. Feed the plots to an AI for analysis
+Stage 5. Piecewise analysis based on timeperiods: daily / weekly / monthly / yearly
+
