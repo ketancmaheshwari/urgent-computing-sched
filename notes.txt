@@ -14,7 +14,6 @@ https://egyankosh.ac.in/bitstream/123456789/20792/1/Unit-6.pdf
 https://web2.uwindsor.ca/math/hlynka/qonline.html
 https://thenewstack.io/an-introduction-to-queue-theory-why-disaster-happens-at-the-edges/
 
-
 == Ideas and Plans ==
 - Hypothetical scenarios of 10,20,30 % of jobs that need urgent resources.
 - Draw a spectrum of types of jobs that need resources urgently on one extreme to "don't care" on other extreme.
