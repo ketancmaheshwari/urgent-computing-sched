@@ -9,6 +9,18 @@ https://ieeexplore.ieee.org/document/9651303
 https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-job-scheduling/
 https://www.computer.org/csdl/proceedings-article/hipcw/2024/091100a068/24MFoMM1vRS : Predictive Modeling of Performance Variability in HPC Applications
 
+== Simulators ==
+-- C. Galleguillos, Z. Kiziltan, A. Netti, and R. Soto, "Accasim: a customizable workload management simulator for job dispatching research in HPC systems," Cluster Computing, vol. 23, no. 1, pp. 107–122, 2020.
+https://link.springer.com/article/10.1007/s10586-019-02905-5
+-- P.-F. Dutot, M. Mercier, M. Poquet, and O. Richard, "Batsim: a realistic language-independent resources and jobs management systems simulator," in Proc. of JSSPP Workshop 2015. Springer, 2015, pp. 178–197.
+https://link.springer.com/chapter/10.1007/978-3-319-61756-5_10
+-- D. Klusacek, M. Soysal, and F. Suter, "Alea–complex job scheduling simulator," in Proc. of PPAM 2019. Springer, 2019, pp. 217–229
+
+== Simulator Resources ==
+https://stackoverflow.com/questions/27685320/what-is-the-minimum-number-of-computers-for-a-slurm-cluster
+https://hpckp.org/articles/how-to-use-the-slurm-simulator-as-a-development-and-testing-environment/
+https://github.com/ubccr-slurm-simulator/slurm_sim_tools
+
 == Other Resources ==
 https://egyankosh.ac.in/bitstream/123456789/20792/1/Unit-6.pdf
 https://web2.uwindsor.ca/math/hlynka/qonline.html
@@ -17,7 +29,6 @@ https://thenewstack.io/an-introduction-to-queue-theory-why-disaster-happens-at-t
 == Ideas and Plans ==
 - Hypothetical scenarios of 10,20,30 % of jobs that need urgent resources.
 - Draw a spectrum of types of jobs that need resources urgently on one extreme to "don't care" on other extreme.
-
 
 == Major Contributions of the study ==
 - In depth analysis of the behavior of the various job-scheduling schemes in the presence of urgent computing
@@ -58,6 +69,9 @@ Scheduling itself is a complex problem, especially the HPC job scheduling that i
 
 in this paper we provide a workflow that implements a readymade recipe for extensive analysis of current jobs that will give readily insights on the jobs that have already run. We hope that this workflow will be useful for the community to analyze a site's historical jobs and it will provide insights on how to the overall performance of a center and inform shaping of the future policies of a given center.
 
+- Produce a comprehensive chart where each job is represented as a multi-layer pie chart that is then plotted into two dimensions of values / properties. Example of a multi-level pie chart here: https://youtu.be/jaAGX3MiU6c ; Another example: https://www2.microstrategy.com/producthelp/current/MSTRWeb/webhelp/lang_1033/Content/Creating_a_graph_with_pies_or_rings.htm
+https://www.reddit.com/r/dataisbeautiful/comments/1kc6mal/australian_houses_are_huge_oc/
+
 - Produce a user oriented evaluation. How did top 1000 users' jobs fared over a period of time, say 1 year. wait times, run times, end status of jobs.
 
 Workflow stages:
@@ -72,3 +86,34 @@ Stage 3. Plot data
 Stage 4. Feed the plots to an AI for analysis
 Stage 5. Piecewise analysis based on timeperiods: daily / weekly / monthly / yearly
 
+== Cite text from this abstract from F. Suter's paper: Improving Fairness in a Large Scale HTC system Through Workload Analysis and Simulation
+Monitoring and analyzing the execution of a workload is at
+the core of the operation of data centers. It allows operators to verify
+that the operational objectives are satisfied or detect and react to any
+unexpected and unwanted behavior. However, the scale and complexity
+of large workloads composed of millions of jobs executed each month
+on several thousands of cores, often limit the depth of such an analysis.
+This may lead to overlook some phenomena that, while not harmful at
+a global scale, can be detrimental to a specific class of users.
+In this paper, we illustrate such a situation by analyzing a large High
+Throughput Computing (HTC) workload trace coming from one of the
+largest academic computing centers in France. The Fair-Share algorithm
+at the core of the batch scheduler ensures that all user groups are fairly
+provided with an amount of computing resources commensurate to their
+expressed needs. However, a deeper analysis of the produced schedule,
+especially of the job waiting times, shows a certain degree of unfairness
+between user groups. We identify the configuration of the quotas and
+scheduling queues as the main root causes of this unfairness. We thus
+propose a drastic reconfiguration of the system that aims at being more
+suited to the characteristics of the workload and at better balancing
+the waiting time among user groups. We evaluate the impact of this
+reconfiguration through detailed simulations. The obtained results show
+that it still satisfies the main operational objectives while significantly
+improving the quality of service experienced by formerly unfavored users.
+
+== Time to pull data from the slurm database ==
+- 849 seconds for 2022 data
+- 964 seconds for 2023 data
+- 603 seconds for 2024 data
+
+ 
