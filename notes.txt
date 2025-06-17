@@ -116,4 +116,3 @@ improving the quality of service experienced by formerly unfavored users.
 - 964 seconds for 2023 data
 - 603 seconds for 2024 data
 
- 
