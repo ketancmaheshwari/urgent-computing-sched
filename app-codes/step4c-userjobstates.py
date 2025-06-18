@@ -37,8 +37,8 @@ def main():
 
     args = parser.parse_args()
 
-    print(f"Input file: {args.infile}")
-    print(f"Output file: {args.outfile}")
+    #print(f"Input file: {args.infile}")
+    #print(f"Output file: {args.outfile}")
 
     if not args.infile:
         raise ValueError("Input file must be specified with --infile argument.")
@@ -73,6 +73,7 @@ def main():
                 labels={'Count': 'Number of Jobs Submitted', 'UID': 'User ID', 'NormalizedState': 'Job State'},
                 category_orders={'NormalizedState': states})
 
+    bar.update_xaxes(showticklabels=False)
     bar.write_html(args.outfile)
 
 if __name__ == "__main__":
