@@ -3,6 +3,9 @@
 # To run: ./step1-obtaindata.sh $startyear $endyear $granularity $cacheloc $outloc
 #
 
+querystring="sacct --format=\"UID, GID, JobIDRaw, Group, Account, JobName, TimelimitRaw, Submit, Start, End, State, ExitCode, ReservationId, Reservation, Priority, Eligible, Constraints, SystemCPU, CPUTimeRAW, ElapsedRaw, Layout, NTasks, QOSREQ, QOS, Restarts, WorkDir, ConsumedEnergyRaw, FailedNode, AveDiskRead, AveDiskWrite, MaxDiskRead, MaxDiskWrite, Partition, Reason, Suspended, AllocNodes, AveRSS, MaxRSS, DerivedExitCode, AveVMSize, MaxVMSize, ReqMem, ReqNodes, NNodes, Planned, PlannedCPURAW, NCPUS, UserCPU, ReqCPUS, TotalCPU, TRESUsageInTot, TRESUsageOutTot, ReqTRES, AllocTRES, TRESUsageInMax, TRESUsageOutMax, Flags, Comment, SystemComment, AdminComment\" -a -P " 
+
+
 if [ "$#" -ne 5 ]
 then
 	echo "Need 5 args, presented $#, exiting"
@@ -19,7 +22,38 @@ CACHELOC=$1
 shift
 OUTLOC=$1
 
+if [ "$CACHELOC" != "none" ]
+then
+	echo "Data available in cache."
+	OUTLOC=$CACHELOC
+	exit 0
+fi
+
 mkdir -p $OUTLOC
-#
-sacct --format="UID, GID, JobIDRaw, Group, Account, JobName, TimelimitRaw, Submit, Start, End, State, ExitCode, ReservationId, Reservation, Priority, Eligible, Constraints, SystemCPU, CPUTimeRAW, ElapsedRaw, Layout, NTasks, QOSREQ, QOS, Restarts, WorkDir, ConsumedEnergyRaw, FailedNode, AveDiskRead, AveDiskWrite, MaxDiskRead, MaxDiskWrite, Partition, Reason, Suspended, AllocNodes, AveRSS, MaxRSS, DerivedExitCode, AveVMSize, MaxVMSize, ReqMem, ReqNodes, NNodes, Planned, PlannedCPURAW, NCPUS, UserCPU, ReqCPUS, TotalCPU, TRESUsageInTot, TRESUsageOutTot, ReqTRES, AllocTRES, TRESUsageInMax, TRESUsageOutMax, Flags, Comment, SystemComment, AdminComment" -a -P -S"$SYEAR"-01-01 -E"$EYEAR"-01-02 > "$OUTLOC/$SYEAR-$EYEAR-$GRAN.txt"
-#
+
+if [ $GRAN = "month" ]
+then
+  echo "monthly granularity"
+  for year in $(seq $SYEAR $EYEAR)
+  do
+    for month in $(seq 1 12)
+    do
+	  echo "Running query per month $month-$year"
+          # invalid dates will be ignored
+	  # $querystring -S"$year"-"$month"-01 -E"$year"-"$month"-31 > "$OUTLOC/$year-$month.txt"
+	  sleep 10
+    done
+  done
+fi
+
+if [ $GRAN = "year" ]
+then
+  echo "year granularity"
+  for year in $(seq $SYEAR $EYEAR)
+  do
+    echo "Running query per year $year" 
+    # $querystring -S"$year"-01-01 -E"$year"-12-31 > "$OUTLOC/$year.txt"
+    sleep 10
+  done
+fi
+
