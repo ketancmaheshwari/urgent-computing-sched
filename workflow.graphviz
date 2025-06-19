@@ -1,0 +1,20 @@
+digraph mygraph {
+  fontname="Helvetica,Arial,sans-serif"
+  node [fontname="Helvetica,Arial,sans-serif"]
+  edge [fontname="Helvetica,Arial,sans-serif"]
+  node [shape=box];
+  "Obtain Data"
+  "Obtain Data" -> "Curate"
+  "Curate" -> "Analyses1"
+  "Curate" -> "Analyses2"
+  "Curate" -> "Analyses3"
+  "Curate" -> "Analyses4"
+  "Analyses1" -> "compare"
+  "Analyses2" -> "compare"
+  "Analyses3" -> "AI-insight"
+  "Analyses1" -> "Dashboard"
+  "Analyses2" -> "Dashboard"
+  "Analyses3" -> "Dashboard"
+  "Analyses4" -> "Dashboard"
+}
+
