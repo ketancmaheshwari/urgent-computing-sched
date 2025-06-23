@@ -2,17 +2,15 @@
 
 DATALOC=$1
 
-TMPFILE=$(mktemp /tmp/XXXXX)
+#mkdir -p $DATALOC/csvdata
+#
+#TMPFILE=$(mktemp /tmp/XXXXX)
+#
+#for eachfile in $(find $DATALOC -iname '*.txt')
+#do
+#  tr ',' ';' < "$eachfile" > "$TMPFILE"
+#  tr '|' ',' < "$TMPFILE" > "$DATALOC"/csvdata/"$eachfile".csv && rm "$TMPFILE"
+#  awk -F, 'BEGIN{OFS=","}NF==60{print $0}' "$DATALOC"/csvdata/"$eachfile".csv > tmp && mv tmp "$DATALOC"/csvdata/"$eachfile".csv
+#done
 
-for eachfile in $(find $DATALOC -iname '*.txt')
-do
-if grep ';' "$eachfile"
-then
-  echo "Data contains semi-colons, new replacement character needed."
-  exit 1
-else
-  tr ',' ';' < "$eachfile" > "$TMPFILE"
-  tr '|' ',' < "$TMPFILE" > "$DATALOC"/"$eachfile".csv && rm "$TMPFILE"
-fi
-done
-
+echo "$DATALOC/csvdata"

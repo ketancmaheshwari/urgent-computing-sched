@@ -24,8 +24,8 @@ OUTLOC=$1
 
 if [ "$CACHELOC" != "none" ]
 then
-	echo "Data available in cache."
 	OUTLOC=$CACHELOC
+        echo -n $OUTLOC
 	exit 0
 fi
 
@@ -56,4 +56,6 @@ then
     sleep 10
   done
 fi
+
+echo -n $OUTLOC
 
