@@ -1,17 +1,7 @@
 #!/bin/bash
 
-DATALOC=$1
-PARENTDIR=$(dirname "$DATALOC")
-mkdir -p "$PARENTDIR"/csvdata
-
+eachfile=$1
 TMPFILE=$(mktemp /tmp/XXXXX)
 
-for eachfile in $(find $DATALOC -iname '*.txt')
-do
-  fname=$(basename $eachfile)
-  tr ',' ';' < "$eachfile" > "$TMPFILE"
-  tr '|' ',' < "$TMPFILE" > "$PARENTDIR"/csvdata/"$fname".csv && rm "$TMPFILE"
-  awk -F, 'BEGIN{OFS=","}NF==60{print $0}' "$PARENTDIR"/csvdata/"$fname".csv > "$TMPFILE" && mv "$TMPFILE" "$PARENTDIR"/csvdata/"$fname".csv
-done
+tr ',' ';' < "$eachfile" | tr '|' ',' | sed 's/CANCELLED by [0-9].*/CANCELLED/g' | awk -F, 'BEGIN{OFS=","}NF==60{if($1){print $0}}'
 
-echo -n "$PARENTDIR/csvdata"
