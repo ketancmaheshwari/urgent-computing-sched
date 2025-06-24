@@ -22,6 +22,8 @@ CACHELOC=$1
 shift
 OUTLOC=$1
 
+yrs=$(seq $SYEAR $EYEAR)
+
 if [ "$CACHELOC" != "none" ]
 then
 	OUTLOC=$CACHELOC
@@ -34,6 +36,7 @@ mkdir -p $OUTLOC
 if [ $GRAN = "month" ]
 then
   echo "monthly granularity"
+  #parallel "$querystring -S{1}-{2}-01 -E{1}-{2}-31 > $OUTLOC/{1}-{2}.txt" ::: $yrs ::: {1..12}
   for year in $(seq $SYEAR $EYEAR)
   do
     for month in $(seq 1 12)
@@ -46,9 +49,11 @@ then
   done
 fi
 
+
 if [ $GRAN = "year" ]
 then
   echo "year granularity"
+  #parallel "$querystring -S{1}-01-01 -E{1}-12-31 > $OUTLOC/{1}.txt" ::: $yrs 
   for year in $(seq $SYEAR $EYEAR)
   do
     echo "Running query per year $year" 
