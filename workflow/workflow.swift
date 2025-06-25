@@ -4,44 +4,65 @@ import io;
 import sys;
 import files;
 
+string projpath="/home/km0/urgent-computing-sched/";
 
 app (file out) obtain_data (int from_yr, int to_yr, string gran, string cacheloc, string outloc) {
 
-   /* "/lustre/orion/proj-shared/" the_path @stdout=out */
-   "/home/km0/urgent-computing-sched/app-codes/step1-obtaindata.sh" from_yr to_yr gran cacheloc outloc @stdout=out
+   "../app-codes/step1-obtaindata.sh" from_yr to_yr gran cacheloc outloc @stdout=out
 }
 
 app (file out) curate_data (file txtfile) {
 
-   /* "/lustre/orion/proj-shared/" the_path @stdout=out */
-   "/home/km0/urgent-computing-sched/app-codes/step2-curatedata.sh" txtfile @stdout=out
+   "../app-codes/step2-curatedata.sh" txtfile @stdout=out
 }
 
 app (file out) job_waittimes (file input) {
 
-  "/home/km0/urgent-computing-sched/app-codes/step4b-jobwaittimes.py" "--infile" input "--outfile" out
+  "../app-codes/step4b-jobwaittimes.py" "--infile" input "--outfile" out
 }
 
 app (file out) auxdataprep1 (file input) {
       
-  "/home/km0/urgent-computing-sched/app-codes/prep-data4nodevselapsed.sh" input @stdout=out
+  "../app-codes/prep-data4nodevselapsed.sh" input @stdout=out
+}
+
+app (file out) auxdataprep2 (file input) {
+      
+  "../app-codes/prep-data4backfillanalysis.sh" input @stdout=out
 }
 
 app (file out) job_nodevselapsed (file input) {
 
-  "/home/km0/urgent-computing-sched/app-codes/step4a-nodesvselapsed.py" "--infile" input "--outfile" out
+  "../app-codes/step4a-nodesvselapsed.py" "--infile" input "--outfile" out
 }
 
-file outfile1<"out1.txt"> = obtain_data(2024, 2024, "year", "/home/km0/urgent-computing-sched/data/workdata/txtdata", "/home/km0/urgent-computing-sched/data/workdata/txtdata");
 
-string dataloc = read(outfile1);
+app (file out) user_jobstates (file input) {
+
+  "../app-codes/step4c-userjobstates.py" "--infile" input "--outfile" out
+}
+
+app (file out) jobtimediffandstates (file input) {
+
+  "../app-codes/step4d-timediff-state-backfill.py" "--infile" input "--outfile" out
+}
+
+
+
+file raw_data<"out1.txt"> = obtain_data(2024, 2024, "year", 
+                                       "/home/km0/urgent-computing-sched/data/workdata/txtdata", 
+                                       "/home/km0/urgent-computing-sched/data/workdata/txtdata");
+
+string dataloc = read(raw_data);
 file txtfiles[] = glob(dataloc+"/*.txt");
 
 foreach f, i in txtfiles {
- file outfile2<"out2_"+i+".csv"> = curate_data(f);
- file plotfile<"jobwaitplot_"+i+".html"> = job_waittimes(outfile2);
- file tmpoutfile<"tmpoutfile_"+i+".csv"> = auxdataprep1(outfile2);
- file plotfile2<"elapsedvsnodes_"+i+".html"> = job_nodevselapsed(tmpoutfile);
+ file orig_csv<"out2_"+i+".csv"> = curate_data(f);
+ file jobwaitplot<"jobwaitplot_"+i+".html"> = job_waittimes(orig_csv);
+ file userjobstatesplot<"userjobstates_"+i+".html"> = user_jobstates(orig_csv);
+ file nodevselapsedcsv<"tmpoutfile_"+i+".csv"> = auxdataprep1(orig_csv);
+ file timediffcsv<"tmpoutfile2_"+i+".csv"> = auxdataprep2(orig_csv);
+ file plotfile2<"elapsedvsnodes_"+i+".html"> = job_nodevselapsed(nodevselapsedcsv);
+ file plotfile3<"timediff4backfilledjobsandstates"+i+".html"> = jobtimediffandstates(timediffcsv);
 }
-
 
