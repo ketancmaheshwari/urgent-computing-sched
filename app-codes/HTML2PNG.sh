@@ -3,5 +3,13 @@
 HTMLFILE=$1
 PNGFILE=$2
 
-/usr/bin/firefox --screenshot $PNGFILE "file://"$HTMLFILE
+echo '****'
+echo $PWD
+echo $HTMLFILE
+echo $PNGFILE
+echo '****'
+
+killall firefox
+sleep 1
+/usr/bin/firefox --screenshot $PWD/$PNGFILE "file://"$PWD/$HTMLFILE
 
