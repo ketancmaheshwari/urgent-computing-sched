@@ -47,7 +47,15 @@ app (file out) jobtimediffandstates (file input) {
   "../app-codes/step4d-timediff-state-backfill.py" "--infile" input "--outfile" out
 }
 
+app (file out) llmanalysis (file input) {
 
+  "../app-codes/step5-llm-analysis.py" "--infile" input "--outfile" out
+}
+
+app (file out) llmcompare (file input1, file input2) {
+
+  "../app-codes/step5-llm-analysis.py" "--infile" input1 "--infile2" input2 "--outfile" out
+}
 
 file raw_data<"out1.txt"> = obtain_data(2024, 2024, "year", 
                                        "/home/km0/urgent-computing-sched/data/workdata/txtdata", 
@@ -63,6 +71,8 @@ foreach f, i in txtfiles {
  file nodevselapsedcsv<"tmpoutfile_"+i+".csv"> = auxdataprep1(orig_csv);
  file timediffcsv<"tmpoutfile2_"+i+".csv"> = auxdataprep2(orig_csv);
  file plotfile2<"elapsedvsnodes_"+i+".html"> = job_nodevselapsed(nodevselapsedcsv);
- file plotfile3<"timediff4backfilledjobsandstates"+i+".html"> = jobtimediffandstates(timediffcsv);
+ file plotfile3<"timediff4backfilledjobsandstates_"+i+".html"> = jobtimediffandstates(timediffcsv);
+ file llmout<"llmout_"+i+".md"> = llmanalysis(plotfile2);
+ file llmcompout<"llmcompout_"+i+".md"> = llmcompare(plotfile2,plotfile3);
 }
 
