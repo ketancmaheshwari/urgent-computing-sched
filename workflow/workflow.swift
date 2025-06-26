@@ -57,9 +57,13 @@ app (file out) llmcompare (file input1, file input2) {
   "../app-codes/step5-llm-analysis.py" "--infile" input1 "--infile2" input2 "--outfile" out
 }
 
+/*
 file raw_data<"out1.txt"> = obtain_data(2024, 2024, "year", 
                                        "/home/km0/urgent-computing-sched/data/workdata/txtdata", 
                                        "/home/km0/urgent-computing-sched/data/workdata/txtdata");
+*/
+
+file raw_data<"out1.txt"> = obtain_data(2021, 2024, "month", "none", "/lustre/orion/proj-shared/stf053/frontierjobs/urgent-computing-sched/swift-data");
 
 string dataloc = read(raw_data);
 file txtfiles[] = glob(dataloc+"/*.txt");
