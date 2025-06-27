@@ -4,7 +4,14 @@ import io;
 import sys;
 import files;
 
-string projpath="/home/km0/urgent-computing-sched/";
+// Command line arguments:
+date_spec = argp(1);
+date1 = argp(2);
+date2 = argp(3);
+cache = argp(4);
+outloc = argp(5);
+
+raw_data<"out1.txt"> = obtain_data(date1, date2, date_spec, cache, outloc);
 
 app (file out) obtain_data (int from_yr, int to_yr, string gran, string cacheloc, string outloc) {
 
@@ -66,9 +73,6 @@ app (file out) llmcompare (file input1, file input2) {
 
 
 
-file raw_data<"out1.txt"> = obtain_data(2024, 2024, "year", 
-                                       "/home/km0/urgent-computing-sched/data/workdata/txtdata", 
-                                       "/home/km0/urgent-computing-sched/data/workdata/txtdata");
 
 
 //file raw_data<"out1.txt"> = obtain_data(2021, 2024, "month", "none", "/lustre/orion/proj-shared/stf053/frontierjobs/urgent-computing-sched/swift-data");
