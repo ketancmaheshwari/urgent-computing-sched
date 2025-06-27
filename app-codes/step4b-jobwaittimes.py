@@ -48,7 +48,7 @@ def main():
         wait_times.append(wait)
     
     plot = px.line(data, x=data['JobIDRaw'], y=wait_times, color=data['State'],
-                        title='Job Wait Times 2024',
+                        title='Job Wait Times',
                         labels={'x': 'JobID', 'y': 'Wait Time (mins)'},
                         color_discrete_map={'timeout': 'black'})
     

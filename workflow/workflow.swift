@@ -84,11 +84,11 @@ foreach f, i in txtfiles {
  file timediffcsv<"tmpoutfile2_"+i+".csv"> = auxdataprep2(orig_csv);
  file plotfile2<"elapsedvsnodes_"+i+".html"> = job_nodevselapsed(nodevselapsedcsv);
  file plotfile3<"timediff4backfilledjobsandstates_"+i+".html"> = jobtimediffandstates(timediffcsv);
- 
+/* 
  file pngfile2<"elapsedvsnode"+i+".png"> = html2png(plotfile2);
  file pngfile3<"timediff"+i+".png"> = html2png(plotfile3);
 
  file llmout<"llmout_"+i+".md"> = llmanalysis(pngfile2);
- file llmcompout<"llmcompout_"+i+".md"> = llmcompare(pngfile2,pngfile3);
+ file llmcompout<"llmcompout_"+i+".md"> = llmcompare(pngfile2,pngfile3); */
 }
 

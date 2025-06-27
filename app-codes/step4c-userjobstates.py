@@ -31,6 +31,15 @@ def load_data(file):
 
 def main():
 
+    color_map = {
+        'COMPLETED': 'green',
+        'FAILED/NODE_FAIL': 'red',
+        'TIMEOUT': 'yellow',
+        'OUT_OF_MEMORY': 'orange',
+        'RESIZING/REQUEUED': 'blue',
+        'CANCELLED': 'black'
+    }
+
     parser = argparse.ArgumentParser(description="Process command-line arguments.")
     parser.add_argument("--infile", help="Path to the input csv file.")
     parser.add_argument("--outfile", help="Path to the output html file.")
@@ -68,7 +77,7 @@ def main():
     #Without this line, bars are too skinny to see
     grouped['UID'] = grouped['UID'].astype(str)
 
-    bar = px.bar(grouped, x='UID', y='Count', color='NormalizedState',
+    bar = px.bar(grouped, x='UID', y='Count', color='NormalizedState',color_discrete_sequence=['grey', 'blue', 'orange', 'brown', 'magenta', 'gold', 'khaki', 'purple'],
                 title='Jobs Submitted per User',
                 labels={'Count': 'Number of Jobs Submitted', 'UID': 'User ID', 'NormalizedState': 'Job State'},
                 category_orders={'NormalizedState': states})
