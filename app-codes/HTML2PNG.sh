@@ -9,7 +9,5 @@ echo $HTMLFILE
 echo $PNGFILE
 echo '****'
 
-killall firefox
-sleep 1
-/usr/bin/firefox --screenshot $PWD/$PNGFILE "file://"$PWD/$HTMLFILE
+firefox --no-remote --profile /tmp --screenshot $PWD/$PNGFILE "file://$PWD/$HTMLFILE"
 
